@@ -17,4 +17,8 @@
     <Folder Include="src\Application\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FoodOrderApi.Infrastructure\FoodOrderApi.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
