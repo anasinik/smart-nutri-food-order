@@ -538,3 +538,6 @@ FodyWeavers.xsd
 # End of https://www.toptal.com/developers/gitignore/api/dotnetcore,aspnetcore,visualstudio
 
 .env
+
+# EF Core migrations
+src/FoodOrderApi.Infrastructure/Migrations/
