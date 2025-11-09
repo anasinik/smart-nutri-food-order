@@ -1,0 +1,58 @@
+<section class="register-page">
+  <div class="register-card">
+    <h2>Create your account</h2>
+
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+      <!-- First name -->
+      <mat-form-field appearance="outline">
+        <mat-label>First name</mat-label>
+        <input matInput formControlName="firstName" placeholder="John" />
+        <mat-error *ngIf="registrationForm.get('firstName')?.hasError('required')">
+          First name is required
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Last name -->
+      <mat-form-field appearance="outline">
+        <mat-label>Last name</mat-label>
+        <input matInput formControlName="lastName" placeholder="Doe" />
+        <mat-error *ngIf="registrationForm.get('lastName')?.hasError('required')">
+          Last name is required
+        </mat-error>
+
+      </mat-form-field>
+        <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" placeholder="johndoe@email.com" />
+        <mat-error *ngIf="registrationForm.get('email')?.hasError('required')">
+          Email is required
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Username -->
+      <mat-form-field appearance="outline">
+        <mat-label>Username</mat-label>
+        <input matInput formControlName="username" placeholder="johndoe" />
+        <mat-error *ngIf="registrationForm.get('username')?.hasError('required')">
+          Username is required
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Password -->
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="password" placeholder="••••••" />
+        <mat-error *ngIf="registrationForm.get('password')?.hasError('required')">
+          Password is required
+        </mat-error>
+        <mat-error *ngIf="registrationForm.get('password')?.hasError('minlength')">
+          Password must be at least 6 characters
+        </mat-error>
+      </mat-form-field>
+
+      <button mat-flat-button color="primary" type="submit" [disabled]="registrationForm.invalid">
+        Create account
+      </button>
+    </form>
+  </div>
+</section>

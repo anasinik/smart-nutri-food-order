@@ -29,3 +29,11 @@ a[mat-button] {
   background-color: #ff7043 !important;
   color: #fff !important;
 }
+
+mat-label, 
+input.mat-input-element, 
+.mat-mdc-input-element {
+  color: #111 !important;
+  font-weight: 500;
+  opacity: 1 !important;
+}

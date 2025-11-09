@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from './infrastructure/material/material.module';
 import { HomeModule } from './home/home.module';
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-
+import { RegistrationModule } from './registration/registration.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -13,7 +13,9 @@ import { AppComponent } from './app.component';
     CommonModule,
     MaterialModule,
     AppRoutingModule,
-    HomeModule
+    BrowserAnimationsModule,
+    HomeModule,
+    RegistrationModule
   ]
 })
 export class AppModule { }
