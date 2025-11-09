@@ -1,1 +1,31 @@
-/* You can add global styles to this file, and also import other style files */
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: "Inter", Roboto, "Helvetica Neue", sans-serif;
+  background: #fafafa;
+  color: #222;
+}
+
+.mat-toolbar {
+  background: transparent !important;
+  color: #222 !important;
+  box-shadow: none !important;
+}
+
+.mat-mdc-button, 
+.mat-mdc-button-base, 
+.mat-mdc-button.mat-mdc-button-base,
+a[mat-button] {
+  color: #222 !important;
+  font-weight: 500;
+}
+
+.mat-mdc-stroked-button.mat-primary {
+  border-color: #ff7043 !important;
+  color: #ff7043 !important;
+}
+
+.mat-mdc-stroked-button.mat-primary:hover {
+  background-color: #ff7043 !important;
+  color: #fff !important;
+}

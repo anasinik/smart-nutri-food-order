@@ -1,0 +1,79 @@
+:host {
+  display: block;
+  height: 100vh;
+  font-family: "Inter", "Roboto", sans-serif;
+  background: #ffffff;
+}
+
+.hero {
+  padding-top: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 60px;
+  box-sizing: border-box;
+}
+
+/* Left */
+.hero-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 520px;
+}
+
+.hero-left h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #222;
+  line-height: 1.1;
+}
+
+.hero-left p {
+  font-size: 1.1rem;
+  color: #555;
+  max-width: 400px;
+}
+
+.cta-btn {
+  width: fit-content;
+  padding: 12px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+}
+
+/* Right */
+.hero-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-right img {
+  width: 500px;
+  height: auto;
+  object-fit: contain;
+}
+
+@media (max-width: 900px) {
+  .hero {
+    flex-direction: column-reverse;
+    text-align: center;
+    padding: 40px 20px;
+  }
+
+  .hero-left {
+    align-items: center;
+  }
+
+  .hero-right img {
+    width: 300px;
+  }
+}
