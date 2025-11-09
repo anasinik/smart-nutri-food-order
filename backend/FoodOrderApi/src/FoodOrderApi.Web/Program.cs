@@ -1,9 +1,20 @@
-using FoodOrderApi.Infrastructure;
+﻿using FoodOrderApi.Infrastructure;
 using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
 DotNetEnv.Env.Load();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowLocalhost4200", policy =>
+    {
+        policy
+            .WithOrigins("http://localhost:4200") // 👈 Angular app
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
 
 builder.Services.AddInfrastructure(builder.Configuration);
 
@@ -13,6 +24,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddAuthorization();
 
 var app = builder.Build();
+
+app.UseCors("AllowLocalhost4200");
 
 // Seed default roles
 using (var scope = app.Services.CreateScope())
