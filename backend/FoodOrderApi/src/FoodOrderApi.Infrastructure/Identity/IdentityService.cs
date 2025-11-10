@@ -2,6 +2,10 @@
 using FoodOrderApi.Application.Common.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace FoodOrderApi.Infrastructure.Identity
 {
@@ -32,6 +36,7 @@ namespace FoodOrderApi.Infrastructure.Identity
 
         public async Task<(Result Result, string UserId)> CreateUserAsync(RegisterUserDto dto)
         {
+            // TODO: unique email!
             var user = new ApplicationUser
             {
                 UserName = dto.Username,
@@ -87,6 +92,41 @@ namespace FoodOrderApi.Infrastructure.Identity
             var result = await _userManager.DeleteAsync(user);
 
             return result.ToApplicationResult();
+        }
+
+        public async Task<(Result Result, string Token)> LoginAsync(LoginUserDto dto)
+        {
+            var user = await _userManager.FindByNameAsync(dto.Username);
+            if (user == null)
+                return (Result.Failure(["Invalid username or password."]), string.Empty);
+
+            var passwordValid = await _userManager.CheckPasswordAsync(user, dto.Password);
+            if (!passwordValid)
+                return (Result.Failure(["Invalid username or password."]), string.Empty);
+
+            // Generate JWT token
+            var claims = new List<Claim>
+                {
+                    new(ClaimTypes.NameIdentifier, user.Id),
+                    new(ClaimTypes.Name, user.UserName!),
+                    new(ClaimTypes.Role, user.Role.ToString())
+                };
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("this_is_a_very_long_secret_key_1234567890!")); // TODO: use IConfiguration
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            var expires = DateTime.Now.AddHours(2);
+
+            var token = new JwtSecurityToken(
+                issuer: "FoodOrderApi",
+                audience: "FoodOrderApi",
+                claims: claims,
+                expires: expires,
+                signingCredentials: creds
+            );
+
+            var jwt = new JwtSecurityTokenHandler().WriteToken(token);
+
+            return (Result.Success(), jwt);
         }
     }
 }

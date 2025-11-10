@@ -9,5 +9,7 @@ namespace FoodOrderApi.Application.Common.Interfaces
         Task<bool> IsInRoleAsync(string userId, string role);
         Task<bool> AuthorizeAsync(string userId, string policyName);
         Task<Result> DeleteUserAsync(string userId);
+        Task<(Result Result, string Token)> LoginAsync(LoginUserDto dto);
+
     }
 }
