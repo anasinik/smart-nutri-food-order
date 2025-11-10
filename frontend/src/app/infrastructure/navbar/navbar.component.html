@@ -6,12 +6,16 @@
     </div>
 
     <nav class="links">
-      <button mat-stroked-button color="primary" type="button" routerLink="/registration">
+      <button mat-stroked-button *ngIf="!userService.isLoggedIn()" color="primary" type="button" routerLink="/registration">
         Sign up
       </button>
 
-      <button mat-stroked-button color="primary" type="button" routerLink="/login">
+      <button mat-stroked-button *ngIf="!userService.isLoggedIn()" color="primary" type="button" routerLink="/login">
         Log in
+      </button>
+
+      <button mat-stroked-button *ngIf="userService.isLoggedIn()" color="primary" type="button" (click)="onLogout()">
+        Log out
       </button>
     </nav>
   </div>

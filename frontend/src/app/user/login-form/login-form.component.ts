@@ -51,6 +51,8 @@ export class LoginFormComponent {
 
         if (response.result.succeeded && response.token) {
           localStorage.setItem('jwt_token', response.token);
+          var role = this.service.getRole()
+          localStorage.setItem('user_role', role || 'User');
           this.router.navigate(['/restaurants-overview']);
           this.toast.show('Successfully logged in!', 'success');
         } else {

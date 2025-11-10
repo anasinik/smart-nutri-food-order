@@ -4,6 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
+import { UserService } from '../../user/user.service';
 
 @Component({
   selector: 'app-navbar',
@@ -12,4 +13,12 @@ import { RouterModule } from '@angular/router';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent {}
+export class NavbarComponent {
+  constructor(
+    public userService: UserService
+  ) {}
+
+  onLogout() {
+    this.userService.logout()
+  }
+}
