@@ -33,6 +33,8 @@ namespace FoodOrderApi.Infrastructure
 
             // Services
             services.AddScoped<IIdentityService, IdentityService>();
+            services.AddScoped<IJwtService, JwtService>();
+
 
             return services;
         }

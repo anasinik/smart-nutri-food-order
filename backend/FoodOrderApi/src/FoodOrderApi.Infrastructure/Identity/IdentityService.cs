@@ -15,15 +15,18 @@ namespace FoodOrderApi.Infrastructure.Identity
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IUserClaimsPrincipalFactory<ApplicationUser> _userClaimsPrincipalFactory;
         private readonly IAuthorizationService _authorizationService;
+        private readonly IJwtService _jwtService;
 
         public IdentityService(
             UserManager<ApplicationUser> userManager,
             IUserClaimsPrincipalFactory<ApplicationUser> userClaimsPrincipalFactory,
-            IAuthorizationService authorizationService)
+            IAuthorizationService authorizationService,
+            IJwtService jwtService)
         {
             _userManager = userManager;
             _userClaimsPrincipalFactory = userClaimsPrincipalFactory;
             _authorizationService = authorizationService;
+            _jwtService = jwtService;
         }
 
         public async Task<string?> GetUserNameAsync(string userId)
@@ -104,29 +107,11 @@ namespace FoodOrderApi.Infrastructure.Identity
             if (!passwordValid)
                 return (Result.Failure(["Invalid username or password."]), string.Empty);
 
-            // Generate JWT token
-            var claims = new List<Claim>
-                {
-                    new(ClaimTypes.NameIdentifier, user.Id),
-                    new(ClaimTypes.Name, user.UserName!),
-                    new(ClaimTypes.Role, user.Role.ToString())
-                };
+            var roles = await _userManager.GetRolesAsync(user);
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("this_is_a_very_long_secret_key_1234567890!")); // TODO: use IConfiguration
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-            var expires = DateTime.Now.AddHours(2);
+            var token = _jwtService.GenerateToken(user.ToDomainUser(), roles);
 
-            var token = new JwtSecurityToken(
-                issuer: "FoodOrderApi",
-                audience: "FoodOrderApi",
-                claims: claims,
-                expires: expires,
-                signingCredentials: creds
-            );
-
-            var jwt = new JwtSecurityTokenHandler().WriteToken(token);
-
-            return (Result.Success(), jwt);
+            return (Result.Success(), token);
         }
     }
 }
