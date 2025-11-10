@@ -2,6 +2,8 @@
   <div class="register-card">
     <h2>Create your account</h2>
 
+    <br> 
+
     <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
       <!-- First name -->
       <mat-form-field appearance="outline">
@@ -53,6 +55,12 @@
       <button mat-flat-button color="primary" type="submit" [disabled]="registrationForm.invalid">
         Create account
       </button>
+
+      <div class="login-button-container">
+        <button mat-button color="primary" routerLink="/login" class="small-login-btn">
+          Already have an account?  Log in
+        </button>
+      </div>
     </form>
   </div>
 </section>

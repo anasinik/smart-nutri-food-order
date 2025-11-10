@@ -8,7 +8,7 @@
   font-family: "Inter", "Roboto", sans-serif;
 }
 
-.register-card {
+.login-card {
   background: #fff;
   color: #222; 
   border-radius: 16px;
@@ -18,7 +18,7 @@
   text-align: center;
 }
 
-.register-card h2 {
+.login-card h2 {
   font-size: 1.8rem;
   font-weight: 700;
   margin-bottom: 8px;
@@ -63,4 +63,17 @@ form {
 
 mat-error {
   font-size: 0.8rem;
+}
+
+.register-button-container {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.small-register-btn {
+  min-width: auto;
+  padding: 0 8px;
+  font-size: 13px;
+  vertical-align: middle;
 }

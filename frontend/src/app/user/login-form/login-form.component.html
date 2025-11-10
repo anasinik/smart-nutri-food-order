@@ -1,0 +1,45 @@
+<section class="login-page">
+  <div class="login-card">
+    
+    <h2>
+      Welcome back!
+      <br>
+      Sign in to access your dashboard and continue where you left off.
+    </h2>
+
+    <br>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <!-- Username -->
+      <mat-form-field appearance="outline">
+        <mat-label>Username</mat-label>
+        <input matInput formControlName="username" placeholder="johndoe" />
+        <mat-error *ngIf="loginForm.get('username')?.hasError('required')">
+          Username is required
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Password -->
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="password" placeholder="••••••" />
+        <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+          Password is required
+        </mat-error>
+        <mat-error *ngIf="loginForm.get('password')?.hasError('minlength')">
+          Password must be at least 6 characters
+        </mat-error>
+      </mat-form-field>
+
+      <button mat-flat-button color="primary" type="submit" [disabled]="loginForm.invalid">
+        Login
+      </button>
+      
+      <div class="register-button-container">
+        <button mat-button color="primary" routerLink="/registration" class="small-register-btn">
+          Don't have an account?  Register now!
+        </button>
+      </div>
+    </form>
+  </div>
+</section>

@@ -4,7 +4,8 @@ import { ReactiveFormsModule, FormBuilder, Validators, FormGroup } from '@angula
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { RegistrationService } from '../registration.service';
+import { Router, RouterModule } from '@angular/router';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-registration-form',
@@ -14,7 +15,8 @@ import { RegistrationService } from '../registration.service';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    RouterModule
   ],
   templateUrl: './registration-form.component.html',
   styleUrls: ['./registration-form.component.css']
@@ -24,7 +26,8 @@ export class RegistrationFormComponent {
 
   constructor(
     private fb: FormBuilder,
-    private service: RegistrationService
+    private service: UserService,
+    private router: Router
   ) {
     this.registrationForm = this.fb.group({
       firstName: ['', Validators.required],
@@ -41,6 +44,7 @@ export class RegistrationFormComponent {
       this.service.register(data).subscribe({
         next: (id) => {
           console.log("success" + id)
+          void this.router.navigate(['/login']);
         },
         error: (err) => console.log(err)
       })

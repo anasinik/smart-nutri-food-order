@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from './infrastructure/material/material.module';
 import { HomeModule } from './home/home.module';
 import { AppRoutingModule } from './app-routing.module';
-import { RegistrationModule } from './registration/registration.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UserModule } from './user/user.module';
 
 
 @NgModule({
@@ -15,7 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     BrowserAnimationsModule,
     HomeModule,
-    RegistrationModule
+    UserModule
   ]
 })
 export class AppModule { }

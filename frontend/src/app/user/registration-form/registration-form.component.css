@@ -1,0 +1,81 @@
+:host {
+  display: block;
+  height: 100vh;
+  background: linear-gradient(135deg, #fff6f2 0%, #ffe9e0 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Inter", "Roboto", sans-serif;
+}
+
+.register-card {
+  background: #fff;
+  color: #222; 
+  border-radius: 16px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+  padding: 48px;
+  padding-top: 22px;
+  padding-bottom: 5px;
+  width: 420px;
+  text-align: center;
+}
+
+.register-card h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #222;
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 32px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  margin-bottom: 24px;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 12px 0;
+  font-weight: 600;
+  border-radius: 8px;
+  box-shadow: 0 4px 14px rgba(255, 112, 67, 0.3);
+}
+
+.login-link {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.login-link a {
+  color: #ff7043;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
+
+mat-error {
+  font-size: 0.8rem;
+}
+
+.login-button-container {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.small-login-btn {
+  min-width: auto;
+  padding: 0 8px;
+  font-size: 13px;
+  vertical-align: middle;
+}
