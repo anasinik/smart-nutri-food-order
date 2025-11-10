@@ -4,12 +4,9 @@ on:
   push:
     branches:
       - main
-      - dev
-      - feat/*
   pull_request:
     branches:
       - main
-      - dev
 
 jobs:
   build:
@@ -26,6 +23,8 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+        working-directory: frontend
 
       - name: Build Angular project
         run: npm run build --if-present
+        working-directory: frontend
