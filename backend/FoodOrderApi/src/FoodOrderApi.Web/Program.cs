@@ -61,4 +61,6 @@ app.MapControllers();
 
 app.UseMiddleware<ExceptionMiddleware>();
 
+app.UseStaticFiles();
+
 app.Run();

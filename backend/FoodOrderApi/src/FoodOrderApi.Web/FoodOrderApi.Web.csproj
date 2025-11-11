@@ -30,4 +30,8 @@
     <ProjectReference Include="..\FoodOrderApi.Infrastructure\FoodOrderApi.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\restaurants\" />
+  </ItemGroup>
+
 </Project>

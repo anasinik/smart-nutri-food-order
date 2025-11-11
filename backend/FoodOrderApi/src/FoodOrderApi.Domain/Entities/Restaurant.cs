@@ -1,5 +1,4 @@
 ﻿using FoodOrderApi.src.Domain.Common;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FoodOrderApi.src.Domain.Entities
 {
@@ -10,6 +9,7 @@ namespace FoodOrderApi.src.Domain.Entities
         public string Description { get; set; } = string.Empty;
         public string PhoneNumber { get; set; } = string.Empty;
         public Guid MangerId { get; set; }
+        public string? PhotoPath { get; set; }
 
         public List<Meal> Menu { get; set; } = [];
 

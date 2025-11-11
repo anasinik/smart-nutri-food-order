@@ -25,5 +25,25 @@ namespace FoodOrderApi.Controllers
 
             return Ok(result);
         }
+
+        [HttpPost("{id}/photo")]
+        public async Task<IActionResult> UploadPhoto(Guid id, IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+                return BadRequest("No file uploaded.");
+
+            using var ms = new MemoryStream();
+            await file.CopyToAsync(ms);
+            var fileBytes = ms.ToArray();
+
+            var result = await _restaurantService.UploadPhotoAsync(id, fileBytes, file.FileName);
+
+            if (!result.Succeeded)
+                return BadRequest(new { result.Errors });
+
+            return Ok(new { photoUrl = result.PhotoUrl });
+        }
+
+
     }
 }

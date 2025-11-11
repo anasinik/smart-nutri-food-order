@@ -49,5 +49,31 @@ namespace FoodOrderApi.Infrastructure.Restaurants
             return Result.Success();
         }
 
+        public async Task<UploadPhotoResult> UploadPhotoAsync(Guid restaurantId, byte[] fileData, string fileName)
+        {
+            var restaurant = await _context.Restaurants.FindAsync(restaurantId);
+            if (restaurant == null)
+                return new UploadPhotoResult { Succeeded = false, Errors = new[] { "Restaurant not found." } };
+
+            var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/restaurants");
+            Directory.CreateDirectory(uploadsFolder);
+
+            var newFileName = $"{Guid.NewGuid()}{Path.GetExtension(fileName)}";
+            var filePath = Path.Combine(uploadsFolder, newFileName);
+
+            await File.WriteAllBytesAsync(filePath, fileData);
+
+            restaurant.PhotoPath = newFileName;
+            await _context.SaveChangesAsync();
+
+            return new UploadPhotoResult
+            {
+                Succeeded = true,
+                PhotoUrl = $"/images/restaurants/{newFileName}"
+            };
+        }
+
+
+
     }
 }
