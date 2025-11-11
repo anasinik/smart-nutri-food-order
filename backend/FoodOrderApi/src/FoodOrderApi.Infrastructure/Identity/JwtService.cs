@@ -20,11 +20,11 @@ namespace FoodOrderApi.Infrastructure.Identity
         public string GenerateToken(User user, IList<string> roles)
         {
             var claims = new List<Claim>
-        {
-            new(JwtRegisteredClaimNames.Sub, user.Username),
-            new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            new(ClaimTypes.NameIdentifier, user.Id)
-        };
+            {
+                new(JwtRegisteredClaimNames.Sub, user.Username),
+                new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new(ClaimTypes.NameIdentifier, user.Id.ToString())
+            };
 
             foreach (var role in roles)
             {

@@ -15,7 +15,7 @@ namespace FoodOrderApi.Infrastructure.Identity
         {
             return new User
             {
-                Id = this.Id,
+                Id = Guid.Parse(this.Id),
                 FirstName = this.FirstName,
                 LastName = this.LastName,
                 Username = this.Username,
