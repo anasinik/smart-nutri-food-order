@@ -1,4 +1,5 @@
 ﻿using FoodOrderApi.Infrastructure;
+using FoodOrderApi.Middlewares;
 using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,6 +29,7 @@ var app = builder.Build();
 app.UseCors("AllowLocalhost4200");
 
 // Seed default roles
+// TODO: extract to IdentityDataSeed.cs
 using (var scope = app.Services.CreateScope())
 {
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
@@ -56,5 +58,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.Run();
