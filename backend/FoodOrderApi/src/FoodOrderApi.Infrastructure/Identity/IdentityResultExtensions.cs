@@ -1,4 +1,4 @@
-﻿using FoodOrderApi.Application.Common.Models;
+﻿using FoodOrderApi.Application.Common.Models.Common;
 using Microsoft.AspNetCore.Identity;
 
 namespace FoodOrderApi.Infrastructure.Identity

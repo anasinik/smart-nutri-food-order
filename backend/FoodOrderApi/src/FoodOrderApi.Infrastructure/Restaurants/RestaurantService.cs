@@ -1,12 +1,14 @@
 ﻿
 using FoodOrderApi.Application.Common.Interfaces;
-using FoodOrderApi.Application.Common.Models;
+using FoodOrderApi.Application.Common.Models.Common;
+using FoodOrderApi.Application.Common.Models.Restaurant;
+using FoodOrderApi.Application.Common.Models.User;
 using FoodOrderApi.Infrastructure.Data;
 using FoodOrderApi.Infrastructure.Identity;
 using FoodOrderApi.src.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using MySqlX.XDevAPI.Common;
 using Sprache;
 
 namespace FoodOrderApi.Infrastructure.Restaurants
@@ -91,7 +93,32 @@ namespace FoodOrderApi.Infrastructure.Restaurants
             };
         }
 
+        public Task<Result<List<RestaurantDetailsDto>>> GetAllRestaurantsAsync()
+        {
+            _logger.LogInformation("Fetching all restaurants from the database.");
+            var restaurants = _context.Restaurants.Select(r => new RestaurantDetailsDto
+            {
+                Id = r.Id,
+                Name = r.Name,
+                Address = r.Address,
+                Description = r.Description,
+                PhoneNumber = r.PhoneNumber,
+                PhotoPath = r.PhotoPath
+            }).ToListAsync();
 
+            return restaurants
+                .ContinueWith(task =>
+                {
+                    if (task.IsFaulted)
+                    {
+                        _logger.LogError(task.Exception, "Error occurred while fetching restaurants.");
+                        return Result<List<RestaurantDetailsDto>>.Failure(new[] { "Failed to retrieve restaurants." });
+                    }
+
+                    _logger.LogInformation("Successfully retrieved {Count} restaurants.", task.Result.Count);
+                    return Result<List<RestaurantDetailsDto>>.Success(task.Result);
+                }); 
+        }
 
     }
 }

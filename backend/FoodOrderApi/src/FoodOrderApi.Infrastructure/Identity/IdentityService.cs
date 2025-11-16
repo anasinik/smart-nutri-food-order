@@ -1,7 +1,8 @@
 ﻿using FoodOrderApi.Application.Common.Interfaces;
-using FoodOrderApi.Application.Common.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
+using FoodOrderApi.Application.Common.Models.User;
+using FoodOrderApi.Application.Common.Models.Common;
 
 namespace FoodOrderApi.Infrastructure.Identity
 {

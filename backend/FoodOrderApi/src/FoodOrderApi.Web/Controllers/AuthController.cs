@@ -1,5 +1,5 @@
 ﻿using FoodOrderApi.Application.Common.Interfaces;
-using FoodOrderApi.Application.Common.Models;
+using FoodOrderApi.Application.Common.Models.User;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FoodOrderApi.Controllers

@@ -1,5 +1,5 @@
 ﻿using FoodOrderApi.Application.Common.Interfaces;
-using FoodOrderApi.Application.Common.Models;
+using FoodOrderApi.Application.Common.Models.Restaurant;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FoodOrderApi.Controllers
@@ -44,6 +44,16 @@ namespace FoodOrderApi.Controllers
             return Ok(new { photoUrl = result.PhotoUrl });
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var result = await _restaurantService.GetAllRestaurantsAsync();
+
+            if (!result.Succeeded)
+                return BadRequest(result);
+
+            return Ok(result.Data);
+        }
 
     }
 }

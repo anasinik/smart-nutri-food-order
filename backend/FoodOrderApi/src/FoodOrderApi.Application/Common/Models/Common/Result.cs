@@ -1,4 +1,4 @@
-﻿namespace FoodOrderApi.Application.Common.Models
+﻿namespace FoodOrderApi.Application.Common.Models.Common
 {
     public class Result<T>
     {

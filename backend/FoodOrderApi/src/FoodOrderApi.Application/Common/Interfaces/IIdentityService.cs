@@ -1,4 +1,5 @@
-﻿using FoodOrderApi.Application.Common.Models;
+﻿using FoodOrderApi.Application.Common.Models.Common;
+using FoodOrderApi.Application.Common.Models.User;
 
 namespace FoodOrderApi.Application.Common.Interfaces
 {
