@@ -37,6 +37,20 @@ export class UserService {
     return decoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] || null;
   }
 
+  getRoles(): string[] {
+    const token = localStorage.getItem('jwt_token');
+    if (!token) return [];
+
+    const decoded: any = jwtDecode(token);
+    const rolesClaim = decoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+
+    if (Array.isArray(rolesClaim)) return rolesClaim;
+    if (typeof rolesClaim === 'string') return [rolesClaim];
+
+    return [];
+  }
+
+
   isAdmin(): boolean {
     return this.getRole() === 'Admin';
   }

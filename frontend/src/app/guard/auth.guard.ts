@@ -19,14 +19,18 @@ export class AuthGuard implements CanActivate {
       return false;
     }
 
-    const roles = route.data['roles'] as Array<string>;
+    const userRoles = this.userService.getRoles();
+    const allowedRoles = route.data['roles'] as Array<string>;
 
-    const role = this.userService.getRole();
-    if (!role || !roles.includes(role)) {
+    const hasAccess = userRoles.some(r => allowedRoles.includes(r));
+
+    if (!hasAccess) {
+      console.log('Access denied - Users with role', userRoles, 'cannot access this route');
       this.router.navigate(['/home']);
       return false;
     }
 
     return true;
+
   }
 }
