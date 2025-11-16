@@ -6,6 +6,11 @@
     </div>
 
     <nav class="links">
+
+      <button mat-stroked-button *ngIf="userService.getRole() == 'Admin'" color="primary" type="button" routerLink="/create-restaurant">
+        Create restaurant
+      </button>
+
       <button mat-stroked-button *ngIf="!userService.isLoggedIn()" color="primary" type="button" routerLink="/registration">
         Sign up
       </button>

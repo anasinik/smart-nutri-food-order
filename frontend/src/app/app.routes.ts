@@ -4,6 +4,7 @@ import { RegistrationFormComponent } from './user/registration-form/registration
 import { LoginFormComponent } from './user/login-form/login-form.component';
 import { RestaurantsOverviewComponent } from './restaurants/restaurants-overview/restaurants-overview.component';
 import { AuthGuard } from './guard/auth.guard';
+import { CreateRestaurantComponent } from './restaurants/create-restaurant/create-restaurant.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -14,6 +15,12 @@ export const routes: Routes = [
     component: RestaurantsOverviewComponent,
     canActivate: [AuthGuard],
     data: { roles: ['Customer'] }
+  },
+  {
+    path: 'create-restaurant',
+    component: CreateRestaurantComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['Admin'] }
   },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', redirectTo: '/home', pathMatch: 'full' }

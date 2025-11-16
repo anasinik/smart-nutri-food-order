@@ -5,7 +5,7 @@ namespace FoodOrderApi.Application.Common.Interfaces
 {
     public interface IRestaurantService
     {
-        Task<Result> CreateRestaurantAsync(CreateRestaurantDto dto);
+        Task<Result<Guid>> CreateRestaurantAsync(CreateRestaurantDto dto);
         Task<UploadPhotoResult> UploadPhotoAsync(Guid restaurantId, byte[] fileData, string fileName);
     }
 }

@@ -18,6 +18,10 @@ export class NavbarComponent {
     public userService: UserService
   ) {}
 
+  getRole() {
+    this.userService.getRole()
+  }
+
   onLogout() {
     this.userService.logout()
   }

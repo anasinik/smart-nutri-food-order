@@ -46,23 +46,22 @@ export class LoginFormComponent {
 
     const data = this.loginForm.value;
     this.service.login(data).subscribe({
-      next: (response: LoginResponse) => {
+      next: (response: { token: string }) => {
         console.log("LOGIN RESPONSE =", response);
 
-        if (response.result.succeeded && response.token) {
+        if (response.token) {
           localStorage.setItem('jwt_token', response.token);
-          var role = this.service.getRole()
+          const role = this.service.getRole();
           localStorage.setItem('user_role', role || 'User');
-          this.router.navigate(['/restaurants-overview']);
+          void this.router.navigate(['/restaurants-overview']);
           this.toast.show('Successfully logged in!', 'success');
         } else {
-          // TODO: show proper error to user
-          console.error(response.result.errors);
-          this.toast.show("Login failed. Please try again.", 'error')
+          this.toast.show("Login failed. Please try again.", 'error');
         }
       },
-      error: (err) => this.toast.show('Login failed. Please try again.', 'error')
+      error: (_) => this.toast.show('Login failed. Please try again.', 'error')
     });
   }
+
 
 }
