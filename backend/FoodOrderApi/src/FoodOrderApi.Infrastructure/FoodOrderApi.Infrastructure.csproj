@@ -19,6 +19,7 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <FrameworkReference Include="Microsoft.AspNetCore.App" Version="8.0.10" />
+    <PackageReference Include="MySql.Data" Version="9.5.0" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.8" />
   </ItemGroup>
 

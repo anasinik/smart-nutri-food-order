@@ -22,9 +22,9 @@ namespace FoodOrderApi.Controllers
 
             if (!result.Succeeded)
                 return BadRequest(result);
-
-            return Ok(result);
+            return Ok(new { id = result.Data });
         }
+
 
         [HttpPost("{id}/photo")]
         public async Task<IActionResult> UploadPhoto(Guid id, IFormFile file)

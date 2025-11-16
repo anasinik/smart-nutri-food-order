@@ -2,10 +2,6 @@
 using FoodOrderApi.Application.Common.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 
 namespace FoodOrderApi.Infrastructure.Identity
 {
@@ -37,7 +33,7 @@ namespace FoodOrderApi.Infrastructure.Identity
         }
 
 
-        public async Task<(Result Result, string UserId)> CreateUserAsync(RegisterUserDto dto)
+        public async Task<(Result<object> Result, string UserId)> CreateUserAsync(RegisterUserDto dto)
         {
             // TODO: unique email!
             var user = new ApplicationUser
@@ -83,35 +79,22 @@ namespace FoodOrderApi.Infrastructure.Identity
             return result.Succeeded;
         }
 
-        public async Task<Result> DeleteUserAsync(string userId)
-        {
-            var user = await _userManager.FindByIdAsync(userId);
-
-            return user != null ? await DeleteUserAsync(user) : Result.Success();
-        }
-
-        public async Task<Result> DeleteUserAsync(ApplicationUser user)
-        {
-            var result = await _userManager.DeleteAsync(user);
-
-            return result.ToApplicationResult();
-        }
-
-        public async Task<(Result Result, string Token)> LoginAsync(LoginUserDto dto)
+        public async Task<Result<string>> LoginAsync(LoginUserDto dto)
         {
             var user = await _userManager.FindByNameAsync(dto.Username);
             if (user == null)
-                return (Result.Failure(["Invalid username or password."]), string.Empty);
+                return Result<string>.Failure(new[] { "Invalid username or password." });
 
             var passwordValid = await _userManager.CheckPasswordAsync(user, dto.Password);
             if (!passwordValid)
-                return (Result.Failure(["Invalid username or password."]), string.Empty);
+                return Result<string>.Failure(new[] { "Invalid username or password." });
 
             var roles = await _userManager.GetRolesAsync(user);
 
             var token = _jwtService.GenerateToken(user.ToDomainUser(), roles);
 
-            return (Result.Success(), token);
+            return Result<string>.Success(token);
         }
+
     }
 }

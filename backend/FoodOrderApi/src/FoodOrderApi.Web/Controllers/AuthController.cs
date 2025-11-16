@@ -24,16 +24,15 @@ namespace FoodOrderApi.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(LoginUserDto dto)
+        public async Task<IActionResult> Login([FromBody] LoginUserDto dto)
         {
-            var (result, token) = await _identityService.LoginAsync(dto);
+            var result = await _identityService.LoginAsync(dto);
 
             if (!result.Succeeded)
-                return BadRequest(result);
+                return Unauthorized(result);
 
-            return Ok(new {result, token});
+            return Ok(new { token = result.Data });
         }
-
 
     }
 }
