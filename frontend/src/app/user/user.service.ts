@@ -26,7 +26,7 @@ export class UserService {
 
   logout() {
     localStorage.clear()
-    void this.router.navigate(['home'])
+    void this.router.navigate(['/login'])
   }
 
   getRole(): string | null {

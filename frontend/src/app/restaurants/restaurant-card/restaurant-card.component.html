@@ -1,0 +1,16 @@
+<div class="restaurant-card" *ngIf="restaurant">
+  <img 
+    *ngIf="restaurant.photoPath"
+    [src]="getPhotoUrl(restaurant.photoPath)" 
+    [alt]="restaurant.name" 
+    class="restaurant-img"
+  />
+
+  <div class="restaurant-content">
+    <h2>{{ restaurant.name }}</h2>
+    <p class="address">{{ restaurant.address }}</p>
+    <p class="phone">{{ restaurant.phoneNumber }}</p>
+    <p class="description">{{ restaurant.description }}</p>
+    <button (click)="goToMenu()">View Menu</button>
+  </div>
+</div>

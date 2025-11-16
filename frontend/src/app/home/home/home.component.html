@@ -1,13 +1,37 @@
-<section class="hero">
-  <div class="hero-left">
-    <h1>Discover restaurants<br>that deliver near you.</h1>
-    <p>Healthy, tasty and fast — find your next meal in just a few clicks.</p>
-    <button mat-flat-button color="primary" class="cta-btn">
-      Get started
-    </button>
-  </div>
+<ng-container *ngIf="!isLoggedIn; else dashboardView">
+  <!-- Landing page -->
+  <section class="hero">
+    <div class="hero-left">
+      <h1>Discover restaurants<br>that deliver near you.</h1>
+      <p>Healthy, tasty and fast — find your next meal in just a few clicks.</p>
+      <button mat-flat-button color="primary" class="cta-btn">
+        Get started
+      </button>
+    </div>
 
-  <div class="hero-right">
-    <img [src]="heroImage" alt="Delicious food" />
-  </div>
-</section>
+    <div class="hero-right">
+      <img [src]="heroImage" alt="Delicious food" />
+    </div>
+  </section>
+</ng-container>
+
+<ng-template #dashboardView>
+  <section class="dashboard">
+    <div class="tabs-wrapper">
+      <mat-tab-group>
+        <mat-tab label="Restaurants">
+          <div class="tab-content">
+            <app-restaurants-overview/>
+          </div>
+        </mat-tab>
+
+        <mat-tab label="Meals">
+          <div class="tab-content">
+            <!-- meals -->
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </section>
+</ng-template>
+
