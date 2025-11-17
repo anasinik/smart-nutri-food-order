@@ -45,5 +45,16 @@ namespace FoodOrderApi.Controllers
 
             return Ok(new { photoUrl = result.PhotoUrl });
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var result = await _service.GetAllMealsAsync();
+
+            if (!result.Succeeded)
+                return BadRequest(result);
+
+            return Ok(result.Data);
+        }
     }
 }

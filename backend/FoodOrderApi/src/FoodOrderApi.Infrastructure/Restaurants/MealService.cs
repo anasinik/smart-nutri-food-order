@@ -69,7 +69,6 @@ namespace FoodOrderApi.Infrastructure.Restaurants
             return Result<Guid>.Success(meal.Id);
         }
 
-
         public async Task<UploadPhotoResult> UploadPhotoAsync(Guid mealId, byte[] fileData, string fileName)
         {
             var meal = await _context.Meals.FindAsync(mealId);
@@ -92,6 +91,37 @@ namespace FoodOrderApi.Infrastructure.Restaurants
                 Succeeded = true,
                 PhotoUrl = $"/images/meals/{newFileName}"
             };
+        }
+
+        public Task<Result<List<MealDetailsDto>>> GetAllMealsAsync()
+        {
+            _logger.LogInformation("Fetching all meals from the database.");
+            var meals = _context.Meals.Select(m => new MealDetailsDto
+            {
+                Id = m.Id,
+                Name = m.Name,
+                Description = m.Description,
+                Price = m.Price,
+                Calories = m.Calories,
+                Proteins = m.Proteins,
+                Carbohydrates = m.Carbohydrates,
+                Sugars = m.Sugars,
+                IsVegan = m.IsVegan,
+                PhotoPath = m.PhotoPath,
+                RestaurantName = m.Restaurant.Name
+            }).ToListAsync();
+
+            return meals
+                .ContinueWith(task =>
+                {
+                    if (task.IsFaulted)
+                    {
+                        _logger.LogError(task.Exception, "Error fetching meals from the database.");
+                        return Result<List<MealDetailsDto>>.Failure(new[] { "An error occurred while fetching meals." });
+                    }
+
+                    return Result<List<MealDetailsDto>>.Success(task.Result);
+                });
         }
     }
 }
