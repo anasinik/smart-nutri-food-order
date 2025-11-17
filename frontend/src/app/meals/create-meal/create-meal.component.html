@@ -1,0 +1,92 @@
+<form [formGroup]="mealForm" (ngSubmit)="onSubmit()" class="apple-form">
+
+  <!-- LEFT: PHOTO -->
+  <div class="photo-col">
+    <div class="photo-preview" *ngIf="previewUrl; else placeholder">
+      <img [src]="previewUrl" alt="meal photo" />
+    </div>
+
+    <ng-template #placeholder>
+      <div class="photo-placeholder">
+        <span>No photo</span>
+      </div>
+    </ng-template>
+
+    <input 
+      type="file" 
+      accept="image/*" 
+      (change)="onFileSelected($event)" 
+      hidden 
+      #fileInput
+    >
+
+    <button 
+      type="button" 
+      class="upload-btn" 
+      (click)="fileInput.click()"
+    >
+      Upload Photo
+    </button>
+  </div>
+
+  <!-- RIGHT: INPUTS -->
+  <div class="fields-col">
+
+    <label class="field">
+      <span>Name</span>
+      <input formControlName="name" placeholder="Meal name">
+    </label>
+
+    <label class="field">
+      <span>Price (€)</span>
+      <input type="number" formControlName="price" placeholder="12.50" step="0.01">
+    </label>
+
+    <label class="field">
+      <span>Calories</span>
+      <input type="number" formControlName="calories" placeholder="450">
+    </label>
+
+    <label class="field">
+      <span>Proteins (g)</span>
+      <input type="number" formControlName="proteins" placeholder="20">
+    </label>
+
+    <label class="field">
+      <span>Carbohydrates (g)</span>
+      <input type="number" formControlName="carbohydrates" placeholder="55">
+    </label>
+
+    <label class="field">
+      <span>Sugars (g)</span>
+      <input type="number" formControlName="sugars" placeholder="5">
+    </label>
+
+    <label class="field checkbox-field">
+      <input type="checkbox" formControlName="isVegan">
+      <span>Vegan</span>
+    </label>
+
+  </div>
+
+  <!-- DESCRIPTION FULL WIDTH -->
+  <div class="description-row">
+    <label class="field full">
+      <span>Description</span>
+      <textarea 
+        formControlName="description" 
+        placeholder="Describe the meal..."
+      ></textarea>
+    </label>
+  </div>
+
+  <!-- SUBMIT -->
+  <button 
+    type="submit" 
+    class="submit-btn" 
+    [disabled]="mealForm.invalid"
+  >
+    Create Meal
+  </button>
+
+</form>

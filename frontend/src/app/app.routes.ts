@@ -5,6 +5,7 @@ import { LoginFormComponent } from './user/login-form/login-form.component';
 import { RestaurantsOverviewComponent } from './restaurants/restaurants-overview/restaurants-overview.component';
 import { AuthGuard } from './guard/auth.guard';
 import { CreateRestaurantComponent } from './restaurants/create-restaurant/create-restaurant.component';
+import { CreateMealComponent } from './meals/create-meal/create-meal.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -21,6 +22,12 @@ export const routes: Routes = [
     component: CreateRestaurantComponent,
     canActivate: [AuthGuard],
     data: { roles: ['Admin'] }
+  },
+  {
+    path: 'create-meal',
+    component: CreateMealComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['Manager'] }
   },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', redirectTo: '/home', pathMatch: 'full' }

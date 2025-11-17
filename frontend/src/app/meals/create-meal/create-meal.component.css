@@ -1,0 +1,152 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: #fafafa;
+}
+
+.meal-card {
+  width: 780px;
+  background: #ffffff;
+  padding: 38px 48px;
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
+}
+
+.apple-form {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 40px 28px;
+}
+
+.photo-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.photo-preview img {
+  width: 100%;
+  border-radius: 16px;
+  object-fit: cover;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+  margin-bottom: 18px;
+}
+
+.photo-placeholder {
+  width: 100%;
+  height: 160px;
+  border-radius: 16px;
+  border: 1px solid #ddd;
+  background: #f8f8f8;
+  color: #999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  font-size: 14px;
+}
+
+.upload-btn {
+  padding: 8px 18px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  background: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.upload-btn:hover {
+  background: #f2f2f2;
+}
+
+.fields-col {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field span {
+  font-size: 13px;
+  font-weight: 500;
+  color: #444;
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid #dcdcdc;
+  background: #fafafa;
+  font-size: 15px;
+  outline: none;
+  transition: 0.15s;
+}
+
+.field input:focus,
+.field textarea:focus {
+  border-color: #8c8c8c;
+  background: #ffffff;
+}
+
+.field textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.description-row {
+  grid-column: 1 / 3;
+}
+
+.submit-btn {
+  grid-column: 2;
+  justify-self: end;
+
+  padding: 12px 26px;
+  background: #111;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.submit-btn:hover {
+  background: #333;
+}
+
+.submit-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+@media (max-width: 720px) {
+  .meal-card {
+    width: 92%;
+    padding: 28px;
+  }
+
+  .apple-form {
+    grid-template-columns: 1fr;
+  }
+
+  .description-row {
+    grid-column: 1;
+  }
+
+  .submit-btn {
+    grid-column: 1;
+    justify-self: stretch;
+  }
+}

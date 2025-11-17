@@ -11,6 +11,10 @@
         Create restaurant
       </button>
 
+      <button mat-stroked-button *ngIf="userService.getRole() == 'Customer,Manager'" color="primary" type="button" routerLink="/create-meal">
+        Create meal
+      </button>
+
       <button mat-stroked-button *ngIf="!userService.isLoggedIn()" color="primary" type="button" routerLink="/registration">
         Sign up
       </button>
