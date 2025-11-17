@@ -1,0 +1,29 @@
+<div class="meal-card" *ngIf="meal">
+  <img 
+    *ngIf="meal.photoPath"
+    [src]="getPhotoUrl(meal.photoPath)" 
+    [alt]="meal.name" 
+    class="meal-img"
+  />
+
+  <div class="meal-content">
+    <div class="meal-header">
+      <h2>{{ meal.name }}</h2>
+      <span class="price-tag">€{{ meal.price }}</span>
+    </div>
+
+    <p class="restaurant">🏪 {{ meal.restaurantName }}</p>
+    <p class="description">📝 {{ meal.description }}</p>
+
+    <div class="nutrition-grid">
+      <div><span>🔥</span> {{ meal.calories }} kcal</div>
+      <div><span>💪</span> {{ meal.proteins }} g protein</div>
+      <div><span>🍞</span> {{ meal.carbohydrates }} g carbs</div>
+      <div><span>🍭</span> {{ meal.sugars }} g sugar</div>
+    </div>
+
+    <p class="vegan" *ngIf="meal.isVegan">🌱 Vegan-friendly</p>
+
+    <button (click)="addToCart()">🛒 Add to Cart</button>
+  </div>
+</div>

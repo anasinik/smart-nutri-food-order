@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { env } from '../../env';
+import { Meal } from './model/meal-details.model';
 
 @Injectable({
   providedIn: 'root'
@@ -21,9 +22,9 @@ export class MealService {
       return this.http.post<any>(`${env}/api/Meal/${mealId}/photo`, file);
     }
   
-    // getAll(): Observable<Meal[]> {
-    //   return this.http.get<Meal[]>(env + "/api/Meal");
-    // }
+    getAll(): Observable<Meal[]> {
+      return this.http.get<Meal[]>(env + "/api/Meal");
+    }
   
     getPhotoUrl(photoPath?: string): string {
       if (!photoPath) return '';

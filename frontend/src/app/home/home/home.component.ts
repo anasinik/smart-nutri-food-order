@@ -7,6 +7,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { UserService } from '../../user/user.service';
 import { RestaurantsOverviewComponent } from "../../restaurants/restaurants-overview/restaurants-overview.component";
+import { MealsOverviewComponent } from '../../meals/meals-overview/meals-overview.component';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +19,8 @@ import { RestaurantsOverviewComponent } from "../../restaurants/restaurants-over
     MatIconModule,
     MatToolbarModule,
     MatTabsModule,
-    RestaurantsOverviewComponent
+    RestaurantsOverviewComponent,
+    MealsOverviewComponent
 ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'

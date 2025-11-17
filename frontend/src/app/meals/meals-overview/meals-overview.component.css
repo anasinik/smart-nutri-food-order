@@ -1,0 +1,14 @@
+.meal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem;
+  justify-items: center;
+}
+
+
+@media (max-width: 640px) {
+  .meal-grid {
+    grid-template-columns: 1fr;
+  }
+}
