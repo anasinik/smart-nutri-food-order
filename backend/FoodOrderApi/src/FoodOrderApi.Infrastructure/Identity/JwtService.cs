@@ -21,9 +21,11 @@ namespace FoodOrderApi.Infrastructure.Identity
         {
             var claims = new List<Claim>
             {
-                new(JwtRegisteredClaimNames.Sub, user.Username),
+                new(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
                 new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new(ClaimTypes.NameIdentifier, user.Id.ToString())
+
+                new(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new(ClaimTypes.Name, user.Username)
             };
 
             foreach (var role in roles)
@@ -36,14 +38,15 @@ namespace FoodOrderApi.Infrastructure.Identity
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(
-                _config["Jwt:Issuer"],
-                _config["Jwt:Audience"],
-                claims,
-                expires: DateTime.Now.AddHours(1),
+                issuer: "FoodOrderApp",
+                audience: "FoodOrderAppUsers",
+                claims: claims,
+                expires: DateTime.UtcNow.AddHours(1),
                 signingCredentials: creds
             );
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
     }
 }

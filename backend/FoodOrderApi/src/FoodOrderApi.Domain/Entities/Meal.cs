@@ -15,6 +15,9 @@ namespace FoodOrderApi.src.Domain.Entities
         public double Carbohydrates { get; set; } // grams
         public double Sugars { get; set; }        // grams
 
+        public bool IsVegan { get; set; }
+        public string PhotoPath { get; set; } = string.Empty;
+
         public Restaurant? Restaurant { get; set; }
     }
 }

@@ -2,7 +2,6 @@
 using FoodOrderApi.Application.Common.Interfaces;
 using FoodOrderApi.Application.Common.Models.Common;
 using FoodOrderApi.Application.Common.Models.Restaurant;
-using FoodOrderApi.Application.Common.Models.User;
 using FoodOrderApi.Infrastructure.Data;
 using FoodOrderApi.Infrastructure.Identity;
 using FoodOrderApi.src.Domain.Entities;
@@ -59,7 +58,7 @@ namespace FoodOrderApi.Infrastructure.Restaurants
                 Address = dto.Address,
                 Description = dto.Description,
                 PhoneNumber = dto.PhoneNumber,
-                MangerId = Guid.Parse(manager!.Id)
+                ManagerId = Guid.Parse(manager!.Id)
             };
 
             _context.Restaurants.Add(restaurant);

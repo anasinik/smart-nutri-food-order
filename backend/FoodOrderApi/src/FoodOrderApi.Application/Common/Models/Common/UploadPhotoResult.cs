@@ -1,4 +1,4 @@
-﻿namespace FoodOrderApi.Application.Common.Models.User
+﻿namespace FoodOrderApi.Application.Common.Models.Common
 {
     public class UploadPhotoResult
     {
