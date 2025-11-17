@@ -25,6 +25,10 @@ export class MealService {
     getAll(): Observable<Meal[]> {
       return this.http.get<Meal[]>(env + "/api/Meal");
     }
+
+    getMealsForRestaurant(restaurantId: string): Observable<Meal[]> {
+      return this.http.get<Meal[]>(`${env}/api/Meal/${restaurantId}`);
+    }
   
     getPhotoUrl(photoPath?: string): string {
       if (!photoPath) return '';

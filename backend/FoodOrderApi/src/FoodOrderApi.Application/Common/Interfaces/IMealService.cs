@@ -9,5 +9,6 @@ namespace FoodOrderApi.Application.Common.Interfaces
         Task<Result<Guid>> CreateMealAsync(CreateMealDto dto);
         Task<UploadPhotoResult> UploadPhotoAsync(Guid mealId, byte[] fileData, string fileName);
         Task<Result<List<MealDetailsDto>>> GetAllMealsAsync();
+        Task<Result<List<MealDetailsDto>>> GetMealsByRestaurantAsync(Guid restaurantId);
     }
 }

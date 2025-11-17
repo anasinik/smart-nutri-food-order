@@ -56,5 +56,16 @@ namespace FoodOrderApi.Controllers
 
             return Ok(result.Data);
         }
+
+        [HttpGet("{restaurantId}")]
+        public async Task<IActionResult> GetById(Guid restaurantId)
+        {
+            var result = await _service.GetMealsByRestaurantAsync(restaurantId);
+
+            if (!result.Succeeded)
+                return BadRequest(result);
+
+            return Ok(result.Data);
+        }
     }
 }
