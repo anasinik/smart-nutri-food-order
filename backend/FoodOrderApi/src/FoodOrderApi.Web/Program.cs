@@ -9,6 +9,10 @@ using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using System.Text;
 using FoodOrderApi.Middlewares;
+using FoodOrderApi.Infrastructure.Embedding;
+using Azure.AI.OpenAI;
+using Azure;
+using FoodOrderApi.Infrastructure.AI;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,6 +40,24 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<FoodOrderDbContext>()
     .AddDefaultTokenProviders();
 
+
+// --------------------
+// Azure OpenAI Client
+// --------------------
+var config = builder.Configuration.GetSection("AzureOpenAI");
+
+var azureEndpoint = new Uri(builder.Configuration["AzureOpenAI:Endpoint"]);
+var azureApiKey = builder.Configuration["AzureOpenAI:ApiKey"];
+
+// Create Azure OpenAI Client
+var client = new AzureOpenAIClient(
+    azureEndpoint,
+    new AzureKeyCredential(azureApiKey)
+);
+
+// Register in DI
+builder.Services.AddSingleton(client);
+
 // --------------------
 // Application services
 // --------------------
@@ -43,6 +65,10 @@ builder.Services.AddScoped<IIdentityService, IdentityService>();
 builder.Services.AddScoped<IJwtService, JwtService>();
 builder.Services.AddScoped<IRestaurantService, RestaurantService>();
 builder.Services.AddScoped<IMealService, MealService>();
+builder.Services.AddScoped<IEmbeddingService, EmbeddingService>();
+builder.Services.AddScoped<IRetrievalService, RetrievalService>();
+builder.Services.AddScoped<IPromptBuilder, PromptBuilder>();
+builder.Services.AddScoped<IChatService, ChatService>();
 builder.Services.AddHttpContextAccessor();
 
 // --------------------

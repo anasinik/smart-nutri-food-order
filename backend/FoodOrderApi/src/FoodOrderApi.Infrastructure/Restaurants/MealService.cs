@@ -15,16 +15,19 @@ namespace FoodOrderApi.Infrastructure.Restaurants
         private readonly FoodOrderDbContext _context;
         private readonly ILogger<MealService> _logger;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IEmbeddingService _embeddingService;
 
         public MealService(
             FoodOrderDbContext context,
             ILogger<MealService> logger,
-            IHttpContextAccessor httpContextAccessor
+            IHttpContextAccessor httpContextAccessor,
+            IEmbeddingService embeddingService
             )
         {
             _context = context;
             _logger = logger;
             _httpContextAccessor = httpContextAccessor;
+            _embeddingService = embeddingService;
         }
 
         public async Task<Result<Guid>> CreateMealAsync(CreateMealDto dto)
@@ -65,6 +68,48 @@ namespace FoodOrderApi.Infrastructure.Restaurants
             await _context.SaveChangesAsync();
 
             _logger.LogInformation("Created new meal with ID: {MealId}", meal.Id);
+
+
+            // TODO: extract to background job 
+            // TODO: extract to simple method
+            // -----------------------
+            //  GENERATE EMBEDDING
+            // -----------------------
+            try
+            {
+                var vector = await _embeddingService.CreateMealEmbeddingAsync(meal);
+
+                var mealEmbedding = new MealEmbedding
+                {
+                    MealId = meal.Id,
+                    Embedding = vector
+                };
+
+                _context.MealEmbeddings.Add(mealEmbedding);
+                await _context.SaveChangesAsync();
+
+                _logger.LogInformation("Created embedding for meal {MealId}", meal.Id);
+            }
+            catch (Exception ex)
+            {
+
+                // TODO: delete once embedding generation is stable
+                // Dummy embedding za test
+                var dummyVector = new float[1536]; // same dimensions as text-embedding-3-large
+                var rand = new Random();
+                for (int i = 0; i < dummyVector.Length; i++)
+                    dummyVector[i] = (float)rand.NextDouble();
+
+                var mealEmbedding = new MealEmbedding
+                {
+                    MealId = meal.Id,
+                    Embedding = dummyVector
+                };
+
+                _context.MealEmbeddings.Add(mealEmbedding);
+                await _context.SaveChangesAsync();
+                _logger.LogError(ex, "Failed to generate embedding for meal {MealId}", meal.Id);
+            }
 
             return Result<Guid>.Success(meal.Id);
         }

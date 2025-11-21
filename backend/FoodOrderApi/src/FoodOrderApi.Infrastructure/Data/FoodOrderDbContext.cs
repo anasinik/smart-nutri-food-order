@@ -2,6 +2,7 @@
 using FoodOrderApi.src.Domain.Entities;
 using FoodOrderApi.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using FoodOrderApi.Application.Common.Models.Meal;
 
 namespace FoodOrderApi.Infrastructure.Data
 {
@@ -16,5 +17,7 @@ namespace FoodOrderApi.Infrastructure.Data
         public DbSet<Meal> Meals { get; set; } = null!;
         public DbSet<Order> Orders { get; set; } = null!;
         public DbSet<OrderItem> OrderItems { get; set; } = null!;
+        
+        public DbSet<MealEmbedding> MealEmbeddings { get; set; } = null!;
     }
 }
