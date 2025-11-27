@@ -15,14 +15,14 @@ import { ChatWidgetComponent } from './nutrition-chat-module/chat-widget/chat-wi
 })
 export class AppComponent {
   title = 'frontend';
-  showNavbar = true;
+  loggedIn = true;
 
   @ViewChild(ChatWidgetComponent) chatWidget!: ChatWidgetComponent;
 
   constructor(private router: Router) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        this.showNavbar = !event.url.includes('login') && !event.url.includes('registration');
+        this.loggedIn = !event.url.includes('login') && !event.url.includes('registration');
       }
     });
   }

@@ -13,6 +13,7 @@ using FoodOrderApi.Infrastructure.Embedding;
 using Azure.AI.OpenAI;
 using Azure;
 using FoodOrderApi.Infrastructure.AI;
+using FoodOrderApi.Infrastructure.Orders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -69,6 +70,8 @@ builder.Services.AddScoped<IEmbeddingService, EmbeddingService>();
 builder.Services.AddScoped<IRetrievalService, RetrievalService>();
 builder.Services.AddScoped<IPromptBuilder, PromptBuilder>();
 builder.Services.AddScoped<IChatService, ChatService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddHttpContextAccessor();
 
 // --------------------

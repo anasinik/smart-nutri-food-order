@@ -1,9 +1,11 @@
-@if (showNavbar) {
-  <app-navbar></app-navbar>
+@if (loggedIn) {
+  <app-navbar/>
 }
 
-<div class="content" [class.padding-top]="showNavbar">
-  <router-outlet></router-outlet>
+<div class="content" [class.padding-top]="loggedIn">
+  <router-outlet/>
 </div>
 
-<app-chat-widget></app-chat-widget> 
+@if (loggedIn) {
+  <app-chat-widget/> 
+}

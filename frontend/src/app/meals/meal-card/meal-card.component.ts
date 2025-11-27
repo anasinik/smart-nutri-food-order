@@ -2,6 +2,8 @@ import { Component, Input } from '@angular/core';
 import { Meal } from '../model/meal-details.model';
 import { MealService } from '../meal.service';
 import { CommonModule } from '@angular/common';
+import { CartService } from '../../cart/cart.service';
+import { ToastService } from '../../shared/toast/toast.service';
 
 @Component({
   selector: 'app-meal-card',
@@ -16,7 +18,9 @@ export class MealCardComponent {
   @Input() meal?: Meal;
 
   constructor(
-    private service: MealService
+    private service: MealService,
+    private cartService: CartService,
+    private toast: ToastService
   ) { }
 
   getPhotoUrl(mealId: string): string {
@@ -24,6 +28,13 @@ export class MealCardComponent {
   }
   
   addToCart() {
-    // console.log(`Add meal ${this.meal?.name} to cart`);
+    this.cartService.addToCart(this.meal!.id, 1).subscribe({
+      next: () => {
+        this.toast.show('Meal added to cart!', 'success');
+      },
+      error: () => {
+        this.toast.show('Failed to add meal to cart.', 'error');
+      }
+    });
   }
 }

@@ -7,6 +7,7 @@ import { AuthGuard } from './guard/auth.guard';
 import { CreateRestaurantComponent } from './restaurants/create-restaurant/create-restaurant.component';
 import { CreateMealComponent } from './meals/create-meal/create-meal.component';
 import { MealsOverviewComponent } from './meals/meals-overview/meals-overview.component';
+import { CartOverviewComponent } from './cart/cart-overview/cart-overview.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -27,6 +28,12 @@ export const routes: Routes = [
   {
     path: 'meals-overview/:restaurantId',
     component: MealsOverviewComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['Admin', 'Customer', 'Manager'] }
+  },
+  {
+    path: 'cart-overview',
+    component: CartOverviewComponent,
     canActivate: [AuthGuard],
     data: { roles: ['Admin', 'Customer', 'Manager'] }
   },
