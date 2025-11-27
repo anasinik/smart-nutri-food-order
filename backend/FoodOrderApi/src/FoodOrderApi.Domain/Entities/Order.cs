@@ -5,7 +5,6 @@ namespace FoodOrderApi.src.Domain.Entities
 {
     public class Order : BaseAuditableEntity
     {
-        // public User User { get; set; } = null!;
         public Restaurant Restaurant { get; set; } = null!;
         public List<OrderItem> Items { get; set; } = [];
         public OrderStatus Status { get; set; } = OrderStatus.Pending;
