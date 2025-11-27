@@ -27,10 +27,7 @@ import { ChatService } from '../chat.service';
 export class ChatWidgetComponent {
   showChat = false;
   newMessage = '';
-  messages: { from: 'user' | 'ai'; text: string }[] = [
-    { from: 'user', text: 'I want something healthy' },
-    { from: 'ai', text: 'Try a quinoa salad with avocado!' }
-  ];
+  messages: { from: 'user' | 'ai'; text: string }[] = [];
 
   constructor(
     private chatService: ChatService
