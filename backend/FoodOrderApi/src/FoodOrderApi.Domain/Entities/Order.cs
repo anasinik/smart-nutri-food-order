@@ -5,9 +5,10 @@ namespace FoodOrderApi.src.Domain.Entities
 {
     public class Order : BaseAuditableEntity
     {
-        public Restaurant Restaurant { get; set; } = null!;
         public List<OrderItem> Items { get; set; } = [];
         public OrderStatus Status { get; set; } = OrderStatus.Pending;
+        public string Address { get; set; } = string.Empty;
+        public string PaymentMethod { get; set; } = string.Empty;
 
         public void AddItem(OrderItem item)
         {

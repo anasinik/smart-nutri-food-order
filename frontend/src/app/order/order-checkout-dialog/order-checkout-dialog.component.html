@@ -1,0 +1,32 @@
+<h2 mat-dialog-title>Confirm Order</h2>
+
+<mat-dialog-content [formGroup]="checkoutForm" class="dialog-content">
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Delivery Address</mat-label>
+    <input matInput formControlName="address" />
+    <mat-error *ngIf="checkoutForm.get('address')?.hasError('required')">
+      Address is required.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Payment Method</mat-label>
+    <mat-select formControlName="paymentMethod">
+      <mat-option *ngFor="let p of paymentMethods" [value]="p.value">
+        {{ p.label }}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="checkoutForm.get('paymentMethod')?.hasError('required')">
+      Payment method is required.
+    </mat-error>
+  </mat-form-field>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()">Cancel</button>
+  <button mat-flat-button color="primary" (click)="submit()" [disabled]="checkoutForm.invalid">
+    Confirm
+  </button>
+</mat-dialog-actions>

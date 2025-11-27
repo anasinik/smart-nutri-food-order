@@ -2,12 +2,11 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home/home.component';
 import { RegistrationFormComponent } from './user/registration-form/registration-form.component';
 import { LoginFormComponent } from './user/login-form/login-form.component';
-import { RestaurantsOverviewComponent } from './restaurants/restaurants-overview/restaurants-overview.component';
 import { AuthGuard } from './guard/auth.guard';
 import { CreateRestaurantComponent } from './restaurants/create-restaurant/create-restaurant.component';
 import { CreateMealComponent } from './meals/create-meal/create-meal.component';
 import { MealsOverviewComponent } from './meals/meals-overview/meals-overview.component';
-import { CartOverviewComponent } from './cart/cart-overview/cart-overview.component';
+import { CartOverviewComponent } from './order/cart-overview/cart-overview.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent },

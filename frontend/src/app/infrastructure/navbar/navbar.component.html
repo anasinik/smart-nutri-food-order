@@ -1,12 +1,12 @@
 <mat-toolbar class="navbar" color="transparent">
   <div class="nav-inner">
-    <div class="logo">
+
+    <a class="logo" routerLink="/" style="text-decoration: none; display: flex; align-items: center; cursor: pointer;">
       <span class="dot"></span>
       <span class="text">food order</span>
-    </div>
+    </a>
 
     <nav class="links">
-
       <button mat-stroked-button *ngIf="userService.isLoggedIn()" color="primary" type="button" routerLink="/cart-overview">
         🛒 Cart
       </button>
