@@ -103,12 +103,14 @@ The frontend is an **Angular SPA** that communicates with the backend via REST A
    Configure your connection string and OpenAI key in `appsettings.json`:
    ```json
    {
-     "ConnectionStrings": {
-       "DefaultConnection": "your_connection_string"
-     },
-     "OpenAI": {
-       "ApiKey": "your_openai_api_key"
-     }
+    "AzureOpenAI": {
+      "Endpoint": "https://your-resource.openai.azure.com/",
+      "ApiKey": "your_azure_openai_api_key",
+      "ModelName": "gpt-4o",
+      "Deployment": "gpt-4o",
+      "EmbeddingDeployment": "text-embedding-3-large",
+      "ApiVersion": "2025-01-01-preview"
+    }
    }
    ```
    Run the API:
