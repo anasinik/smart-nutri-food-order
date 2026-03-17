@@ -94,6 +94,7 @@ The frontend is an **Angular SPA** that communicates with the backend via REST A
 1. **Clone the repository**
    ```sh
    git clone https://github.com/anasinik/smart-nutri-food-order.git
+   cd smart-nutri-food-order
    ```
 
 2. **Backend setup**
